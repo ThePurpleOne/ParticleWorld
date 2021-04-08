@@ -1,21 +1,16 @@
 /*
-	* Author: Jonas S.
-	* Date: 02/04/2021
-	! Particle header
+    * Author: Jonas S.
+    * Date: 02/04/2021
+    ! Particle header
 */
 
 /*
-	! https://www.youtube.com/watch?v=Z_zmZ23grXE
-	Particules game of life.
-	Color are scaled from stats
-	Cells apply forces on each others
-	Some attract and repulse others
-	Action does not always have reaction
-
-	! Stats of cells
-	? speed
-	? Attraction radius
-	? Repulsion radius
+    RANDOM IDEAS
+    ? https://www.youtube.com/watch?v=Z_zmZ23grXE
+    ! Stats of cells
+    ? speed
+    ? Attraction radius
+    ? Repulsion radius
 */
 
 #ifndef _PARTICLE_H_
@@ -25,19 +20,21 @@
 
 typedef struct
 {
-	unsigned int r;		//?radius
-	int x, y;			//? Pos
-	double vx, vy;		//? velocity
-	double ax, ay;		//? acceleration
-	unsigned int c;		//? color
-	SDL_Renderer* ren;
+    unsigned int r;		//?radius
+    double x, y;        //? Pos
+    double vx, vy;		//? velocity
+    double ax, ay;		//? acceleration
+    double m;           //? mass
+    unsigned int c;		//? color
+    SDL_Renderer* ren;
 } particle;
 
 void Particle_Set(	particle* p, 
-					unsigned char r,
-					double* vect, 			//? initial pos, vel
-					unsigned int c,
-					SDL_Renderer* ren);
+                    unsigned char r,
+                    double* vect, 			//? initial pos, vel
+                    double mass,
+                    unsigned int c,
+                    SDL_Renderer* ren);
 
 void Particle_Draw(particle* p);
 

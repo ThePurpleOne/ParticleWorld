@@ -13,7 +13,6 @@
 void worldApplyForces(particle * tabOfP)
 {
     // ! F(a/b) = G * (ma * mb) / distance Squared
-    // ! mass = 1 again so F = G * 1 / distance Squared
     // ! We need to add all the forces applied from every other cells.
     
     //TODO Optimize
@@ -28,6 +27,13 @@ void worldApplyForces(particle * tabOfP)
             }
         }
     }
+    for (int i = 0; i < NB_BALL; i++) //For Every Particle 
+    {
+        tabOfP[i].ax = tabOfP[i].ax / tabOfP[i].m;
+        tabOfP[i].ay = tabOfP[i].ax / tabOfP[i].m;
+        printf("Ball n%i   : Acceleration X :  %f   | Acceleration Y  %f   \n", i, tabOfP[i].ax, tabOfP[i].ay);
+    }
+    printf("\n\n\n");
 }
 
 

@@ -67,25 +67,31 @@ int main()
     // * END INITs
 
     // ! SETTING UP RANDOM PARTICLES
-    time_t t;
-    srand((unsigned) time(&t)); //set random seed
-
-    for(int i = 0; i < NB_BALL; i++)
     {
-        double tabVect[4] = {
-                    (rand() % WINDOW_WIDTH - 100) + 100, 	//X
-                    (rand() % WINDOW_HEIGHT - 100) + 100,	//Y
-                    (rand() % 5) + 1,						//vX
-                    (rand() % 5) + 1,						//vY
-                    };
-        Particle_Set(   &t_particles[i], 
-                        (rand() % 50) + 10,                  //random Radius
-                        tabVect, 
-                        MAKE_COLOR(RANDOM_COLOR, RANDOM_COLOR, RANDOM_COLOR),
-                        renderer
-                        );
-    }   
+        time_t t;
+        srand((unsigned) time(&t)); //set random seed
 
+        for(int i = 0; i < NB_BALL - 1; i++)
+        {
+            double tabVect[4] = {
+                        (rand() % WINDOW_WIDTH - 400) + 400, 	//X
+                        (rand() % WINDOW_HEIGHT - 400) + 400,	//Y
+                        0,//(rand() % 5) + 1,						//vX
+                        0//(rand() % 5) + 1,						//vY
+                        };
+                        
+            Particle_Set(   &t_particles[i], 
+                            4,//(rand() % 11) + 10,                  //random Radius
+                            tabVect,
+                            1,
+                            MAKE_COLOR(RANDOM_COLOR, RANDOM_COLOR, RANDOM_COLOR),
+                            renderer
+                            );
+        }
+
+        double tabSun[4] = {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0};
+        Particle_Set(&t_particles[NB_BALL - 1], 20, tabSun, 100, COLOR_BLACK, renderer);
+    }
     // ! END SETTING UP RANDOM PARTICLES
 
     while(1)
@@ -105,15 +111,15 @@ int main()
         // * Show fps 
         {
             currentTime = SDL_GetTicks();  //number of ms since init
-            printf("\rFPS : %f", 1000.0 / (double)(currentTime - lastTime) );
+            //printf("\rFPS : %f", 1000.0 / (double)(currentTime - lastTime) );
             lastTime = currentTime;
-            //SDL_Delay(5);
+            SDL_Delay(10);
         }
         // * END Limit and Show fps
 
 
         // ! UPDATE
-        //worldApplyForces(t_particles);
+        worldApplyForces(t_particles);
         for(int i = 0; i < NB_BALL; i++)
         {
             Particle_Update(&t_particles[i]);
@@ -131,6 +137,7 @@ int main()
         // ! Render renderer to the window
         SDL_RenderPresent(renderer);
 
+        //break;
     }
 
     SDL_DestroyRenderer(renderer);

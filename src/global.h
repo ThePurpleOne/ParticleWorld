@@ -7,10 +7,10 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
-#define WINDOW_HEIGHT 950
-#define WINDOW_WIDTH 1920
+#define WINDOW_HEIGHT 700
+#define WINDOW_WIDTH 1500
 #define BACKGROUND_COLOR COLOR_WHITE
-#define NB_BALL 1000
+#define NB_BALL 30
 
 
 
